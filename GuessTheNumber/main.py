@@ -1,10 +1,10 @@
 import random
-import ValidationService
+import Services
 
 
 randomGeneratedNumber = random.randint(1, 10) # takes two args and picks a random number between
 userInput = int(input("Pick a number between 1 and 10: ")) # ask for user input and cast to int
-def isUserInputValid = ValidationService.ValidateUserInfo(userInput)
+isUserInputValid = Services.ValidateUserInfo(userInput)
 
 
 # guys please send me this manic code once it's finished
