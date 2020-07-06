@@ -30,9 +30,9 @@ def getUserInputAndSeeIfValidReturnPassLength():
 def generatePassword(pass_length = 8):
     StringOfEverything = f'{string.ascii_letters}{string.digits}{string.punctuation}'
     listOfEverything = list(listOfEverything)
-    random.shuffle(listOfEverything) # possibly unnecessary but double randoming seems safer idk
     while len(listOfEverything) < pass_length:
         listOfEverything += listOfEverything
+    random.shuffle(listOfEverything) # possibly unnecessary but double randoming seems safer idk
     random_password = random.choices(listOfEverything, k=pass_length)
     random_password = ''.join(random_password)
     return random_password
