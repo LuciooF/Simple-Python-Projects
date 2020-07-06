@@ -26,7 +26,7 @@ def getUserInputAndSeeIfValidReturnPassLength():
         raise TypeError("Invalid User Input, stoopid")      
 
 
-
+# Currently possibly insecure as there will only be one letter of each, in case of a web attack it'd be easier to hack this. Need to make so it picks one random from listof everything everytime, with foreach
 def generatePassword(pass_length = 8):
     stringOfEverything = f'{string.ascii_letters}{string.digits}{string.punctuation}'
     listOfEverything = list(stringOfEverything)
