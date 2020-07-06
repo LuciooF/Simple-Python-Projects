@@ -3,11 +3,8 @@ import string
 import services
 
 
-pass_length = services.getUserInputAndSeeIfValidReturnPassLength()
-generatedPassword = services.generatePassword(pass_length)
+passwordInfo = services.getUserInputAndSeeIfValidReturnPassLength()
+generatedPassword = services.generatePassword(passwordInfo.userinput, passwordInfo.amountOfNumbers)
 
 
 print("Your generated password is: {}".format(generatedPassword))
-
-
-

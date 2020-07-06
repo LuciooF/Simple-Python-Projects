@@ -1,6 +1,13 @@
 import string
 import random
 
+
+class Password:
+    def __init__(self, userinput, amountOfNumbers):
+        self.userinput = userinput
+        self.amountOfNumbers = amountOfNumbers
+
+
 def getUserInputAndSeeIfValidReturnPassLength():
     dud = False
     while dud == False:
@@ -20,19 +27,42 @@ def getUserInputAndSeeIfValidReturnPassLength():
                 print("thats not a valid number are you stupid - Try again you numpty")
         except ValueError:
             print("thats not a valid number are you stupid - Try again you numpty")
+            dud = False   
+    user_number = (input("How many numbers do you want in it? "))
+    try:
+        user_number = int(user_number)
+        if user_number > 0 and user_number < (user_number + 1):
+            pass
+        else:
+            print("thats not a valid number are you stupid - Try again you numpty")
+    except ValueError:
+        print("thats not a valid number are you stupid - Try again you numpty")
     if userInput > 0:
-        return userInput
+        password = Password(0,0)
+        password.userinput = userInput
+        password.amountOfNumbers = user_number
+        return password
     else:
         raise TypeError("Invalid User Input, stoopid")      
 
 
 # Currently possibly insecure as there will only be one letter of each, in case of a web attack it'd be easier to hack this. Need to make so it picks one random from listof everything everytime, with foreach
-def generatePassword(pass_length = 8):
-    stringOfEverything = f'{string.ascii_letters}{string.digits}{string.punctuation}'
+def generatePassword(pass_length = 8, pass_number = 9):
+    stringOfEverything = f'{string.ascii_letters}{string.punctuation}'
+    string_of_numbers = f'{string.digits}'
+    list_of_numbers = list(string_of_numbers)
     listOfEverything = list(stringOfEverything)
-    while len(listOfEverything) < pass_length: #possibly an unnecessary while loop (Sam) though I think it didn't work without this if length was over string lenght
-        listOfEverything += listOfEverything
-    random.shuffle(listOfEverything) # possibly unnecessary but double randoming seems safer idk
-    random_password = random.choices(listOfEverything, k=pass_length)
+    #possibly an unnecessary while loop (Sam) though I think it didn't work without this if length was over string lenght
+    # while len(listOfEverything) < pass_length: 
+    #     listOfEverything += listOfEverything
+    random.shuffle(listOfEverything)
+    random.shuffle(list_of_numbers) # possibly unnecessary but double randoming seems safer idk
+    random_password = []
+    while len(random_password) < (pass_length - pass_number):
+        random_password += random.choices(listOfEverything, k=1)
+    while len(random_password) < (pass_length):
+        random_password += random.choices(list_of_numbers, k=1)
+
+    random.shuffle(random_password)
     random_password = ''.join(random_password)
     return random_password
