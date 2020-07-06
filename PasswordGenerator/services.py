@@ -28,7 +28,7 @@ def getUserInputAndSeeIfValidReturnPassLength():
 
 
 def generatePassword(pass_length = 8):
-    listOfEverything = f'{string.ascii_letters}{string.digits}{string.punctuation}'
+    StringOfEverything = f'{string.ascii_letters}{string.digits}{string.punctuation}'
     listOfEverything = list(listOfEverything)
     random.shuffle(listOfEverything) # possibly unnecessary but double randoming seems safer idk
     while len(listOfEverything) < pass_length:
