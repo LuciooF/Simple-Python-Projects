@@ -1,9 +1,6 @@
 import string
 import random
-class Password:
-    def __init__(self, userinput, amountOfNumbers):
-        self.userinput = userinput
-        self.amountOfNumbers = amountOfNumbers
+
 def getUserInputAndSeeIfValidReturnPassLength():
     nul = False
     while nul == False:
@@ -12,7 +9,7 @@ def getUserInputAndSeeIfValidReturnPassLength():
             userInput = (input("How long do you want the password to be? "))
             try:
                 userInput = int(userInput)
-                if userInput > 0:
+                if userInput >= 8:                   
                     if userInput > 1000:
                         print("That's far too long")
                         continue
@@ -25,17 +22,17 @@ def getUserInputAndSeeIfValidReturnPassLength():
                     else:
                         dud = True
                 else:
-                    print("thats not a valid number are you stupid - Try again you numpty")
+                    print("thats not a valid number are you stupid - Try again you numpty it has to be at least 8 characters")
             except ValueError:
                 print("thats not a valid number are you stupid - Try again you numpty")
                 dud = False
         user_number = (input("How many numbers do you want in it? "))
         try:
             user_number = int(user_number)
-            if user_number >= 0 and user_number < (userInput + 1):
+            if user_number > 0 and user_number < (userInput + 1):
                 pass
             else:
-                print("thats not a valid number are you stupid - Try again you numpty")
+                print("thats not a valid number are you stupid - Try again you numpty, need at least 1 number")
                 continue
         except ValueError:
             print("thats not a valid number are you stupid - Try again you numpty")
@@ -50,20 +47,33 @@ def getUserInputAndSeeIfValidReturnPassLength():
             raise TypeError("Invalid User Input, stoopid")
 # Currently possibly insecure as there will only be one letter of each, in case of a web attack it'd be easier to hack this. Need to make so it picks one random from listof everything everytime, with foreach
 def generatePassword(pass_length = 8, pass_number = 9):
-    stringOfEverything = f'{string.ascii_letters}{string.punctuation}'
+
+    stringOfletters = f'{string.ascii_lowercase}'
+    string_of_upper_letters = f'{string.ascii_uppercase}'
+    string_of_punctuation = f'{string.punctuation}'
     string_of_numbers = f'{string.digits}'
+
+
     list_of_numbers = list(string_of_numbers)
-    listOfEverything = list(stringOfEverything)
-    #possibly an unnecessary while loop (Sam) though I think it didn't work without this if length was over string lenght
-    # while len(listOfEverything) < pass_length:
-    #     listOfEverything += listOfEverything
-    random.shuffle(listOfEverything)
+    listOfletters = list(stringOfletters)
+    list_of_upper_letters = list(string_of_upper_letters)
+    list_of_punctutation = list(string_of_punctuation)
+
+    random.shuffle(listOfletters)
     random.shuffle(list_of_numbers) # possibly unnecessary but double randoming seems safer idk
-    random_password = []
+    random.shuffle(list_of_upper_letters)
+    random.shuffle(list_of_punctutation)
+
+    amount_of_punctuation = random.randint(1,(pass_length - pass_number - 2))
+
+    random_password = [] 
+
     while len(random_password) < (pass_length - pass_number):
-        random_password += random.choices(listOfEverything, k=1)
+        random_password += random.choices(listOfletters, k=1)
     while len(random_password) < (pass_length):
         random_password += random.choices(list_of_numbers, k=1)
+
     random.shuffle(random_password)
     random_password = ''.join(random_password)
+    
     return random_password
