@@ -5,6 +5,13 @@ def get_word():
     return "Oliver".upper()#PyDictionary()
    #gets random word from somewhere
 
+   #todo: get random word generated
+   #fix last hangman image so it shows actual last one
+   #show letters guessed so far
+   #put whether the word was right or wrong underneath the hangman so you  can see without scrolling up
+   #fix "Play again" so it doesnt break
+   #look into UI creating 
+
 
 def play(random_word):
     word_completion = "_" * len(random_word)
@@ -12,19 +19,20 @@ def play(random_word):
     guessed_letters = []
     guessed_words = []
     tries = 6 #?
+    print("Play hangman lad")
     while not guessed and tries > 0:
-        print("Play hangman lad")
         print(display_hangman(tries))
         print(word_completion)
         print("\n")
         guessed = GetAndvalidateInput()
         if guessed in guessed_letters:
             print("You already guessed this, stoopid")
+            guessed = False
         elif guessed not in random_word:
             print("That letter is not in the word lad")
             tries = tries - 1
             guessed_letters.append(guessed) #add equivalent in python? need to google 
-            continue
+            guessed = False
         else:
                 print("nice lad, that leter do be in the word lad")
                 guessed_letters.append(guessed)
@@ -40,6 +48,8 @@ def play(random_word):
                     continue
         if guessed == True:
            print("yay you've guessed the word, congrats")
+        if guessed == False:
+            print(f"You've lost, the word was {random_word}")
             
         
 
