@@ -3,7 +3,7 @@ import string
 import services
 
 
-passwordInfo = services.getUserInputAndSeeIfValidReturnPassLength()
+passwordInfo = services.GetUserInputReturnPasswordClass()
 generatedPassword = services.generatePassword(passwordInfo.userinput, passwordInfo.amountOfNumbers)
 
 
