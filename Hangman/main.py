@@ -1,4 +1,6 @@
 import services
+import Word
+
 #random_word = words.
 
 #Generate random word
@@ -12,12 +14,12 @@ import services
 #calculate lives 
 
 #win/lose/try again
-
+67
 #mini UI from google yaes <3
 
 
 
-word = services.get_word()
+word = Word.makeArrayOutOfWordString()
 services.play(word)
 while input("Play Again? (Y/N) ").upper() == "Y":
     word = services.get_word()
