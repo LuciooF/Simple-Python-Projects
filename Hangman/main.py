@@ -11,16 +11,29 @@ import Word
 
 #check if user letter is in random word
 
-#calculate lives 
+#calculate lives
 
 #win/lose/try again
-67
 #mini UI from google yaes <3
 
 
-
-word = Word.makeArrayOutOfWordString()
-services.play(word)
-while input("Play Again? (Y/N) ").upper() == "Y":
-    word = services.get_word()
+loop = False
+while not loop:
+    word = Word.GetRandomWord()
     services.play(word)
+    # while input("Play Again? (Y/N) ").upper() == "Y":
+    #     break
+    # while input("Play Again? (Y/N) ").upper() == "N":
+    #     loop = True
+    #     break
+    # continue
+    while True:
+        play_again_input = input("Play Again? (Y/N) ").upper()
+        if play_again_input == "Y":
+            break
+        elif play_again_input == "N":
+            loop = True
+            break
+        else:
+            print("Invalid input")
+print("Thanks for playing, have a great day!")
