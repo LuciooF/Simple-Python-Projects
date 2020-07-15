@@ -1,24 +1,16 @@
 import string
-
-
-# from PyDictionary import PyDictionary
-
-# gets random word from somewhere
-
-# todo: get random word generated - fixed
-# fix last hangman image so it shows actual last one - fixed
-# show letters guessed so far
-# put whether the word was right or wrong underneath the hangman so you  can see without scrolling up
-# fix "Play again" so it doesnt break
-# look into UI creating
+import config
 
 
 def play(random_word):
+
     word_completion = "_" * len(random_word)
     guessed = False
     guessed_letters = []
-    guessed_words = []
-    string_guessed_letters = ""
+
+    games_completed = config.add_game()
+
+
     tries = 6  # ?
     print("Play hangman lad")
     print(f"{word_completion}")
@@ -31,7 +23,7 @@ def play(random_word):
             print("You already guessed this, stoopid")
             guessed = False
             string_guessed_letters = " ".join(guessed_letters)
-            print(f"{word_completion} \t Letters you've guessed: {string_guessed_letters}")
+            print(f"{word_completion} \t {string_guessed_letters}")
         elif guessed not in random_word:
             print("That letter is not in the word lad")
             tries -= 1
@@ -39,7 +31,7 @@ def play(random_word):
             string_guessed_letters = " ".join(guessed_letters)
             guessed = False
             print(display_hangman(tries))
-            print(f"{word_completion} \t Letters you've guessed: {string_guessed_letters}")
+            print(f"{word_completion} \t {string_guessed_letters}")
         else:
             guessed_letters.append(guessed)
             word_as_list = list(word_completion)
@@ -49,17 +41,29 @@ def play(random_word):
                 word_as_list[index] = guessed
             word_completion = "".join(word_as_list)
             string_guessed_letters = " ".join(guessed_letters)
-            print(f"{word_completion} \t Letters you've guessed: {string_guessed_letters}")
+            print(f"{word_completion} \t {string_guessed_letters}")
             if "_" not in word_completion:
                 guessed = True
             if "_" in word_completion:
                 guessed = False
                 continue
-        if guessed == True:
+        if guessed:
+            games_won = config.add_win()
+            win_percentage = config.calculate_win_percentage()
+
             print("yay you've guessed the word, congrats")
-        if guessed == False and tries < 1:
             print(display_hangman(tries))
             print(f"You've lost, the word was {random_word}")
+            print(f"Games played: {games_completed}")
+            print(f"Number of wins: {games_won}  Percentage of games won: {win_percentage} Games played: {games_completed}")
+        if guessed is False and tries < 1:
+            games_won = config.add_loss()
+            win_percentage = config.calculate_win_percentage()
+
+            print(display_hangman(tries))
+            print(f"You've lost, the word was {random_word}")
+            print(f"Games played: {games_completed}")
+            print(f"Number of wins: {games_won}  Percentage of games won: {win_percentage} Games played: {games_completed}")
 
 
 def GetAndvalidateInput():
@@ -75,11 +79,6 @@ def GetAndvalidateInput():
         else:
             return user_input.upper()
 
-
-# def GetAndReturnGuessedLetters(guessed_letter, guessed_letters):
-#     cute_guessed_letters = []
-#     for guessed_letter in guessed_letters:
-#         cute_guessed_l
 
 def display_hangman(tries):
     stages = [  # final state: head, torso, both arms, and both legs
