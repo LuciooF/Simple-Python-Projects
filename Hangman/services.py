@@ -53,9 +53,8 @@ def play(random_word):
 
             print("yay you've guessed the word, congrats")
             print(display_hangman(tries))
-            print(f"You've lost, the word was {random_word}")
             print(f"Games played: {games_completed}")
-            print(f"Number of wins: {games_won}  Percentage of games won: {win_percentage} Games played: {games_completed}")
+            print(f"Number of wins: {games_won}  Percentage of games won: {win_percentage}% \nGames played: {games_completed}")
         if guessed is False and tries < 1:
             games_won = config.add_loss()
             win_percentage = config.calculate_win_percentage()
@@ -63,7 +62,7 @@ def play(random_word):
             print(display_hangman(tries))
             print(f"You've lost, the word was {random_word}")
             print(f"Games played: {games_completed}")
-            print(f"Number of wins: {games_won}  Percentage of games won: {win_percentage} Games played: {games_completed}")
+            print(f"Number of wins: {games_won}  Percentage of games won: {win_percentage}% \nGames played: {games_completed}")
 
 
 def GetAndvalidateInput():
